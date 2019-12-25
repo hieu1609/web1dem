@@ -20,6 +20,13 @@
 			}
 		}
 
+		public function GetSearch() {
+			$search="";
+			if (isset($_REQUEST['ok'])) 
+				$search = addslashes($_GET['search']);
+			return $search;
+		}
+
 		public function GetCategory() {
 			$cat_id;
 			if (!isset($_GET['category']))

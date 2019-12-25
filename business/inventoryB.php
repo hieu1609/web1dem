@@ -13,8 +13,22 @@
     // $test->GetRelevantProductID($from, $to);
     // echo $test->GetLatestPerformance(2);
     // $test->GetPoorPerformanceList($from, $to);
+    // $test->SearchProduct($keyword);
     class InventoryB
     {
+        public function SearchProduct($keyword)
+        {
+            //$keyword = preg_replace("#[^0-9a-z]#i","", $keyword);
+            $sql = "SELECT * FROM product WHERE product_name LIKE '%$keyword%'";
+            $db = new Database();
+            $result = $db->select($sql);
+            // while($row = mysqli_fetch_array($result)){
+            //     echo $row['product_name'];
+            //     echo "<br>";
+            // }
+            return $result;
+        }
+        
         public function GetPoorPerformanceList($from, $to) {
             //1. Get product id
             $product_list = $this->GetRelevantProductID($from, $to);

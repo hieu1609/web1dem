@@ -85,7 +85,7 @@ session_start();
                     <?php 
                         include "presentation/productP.php";
                         $pp = new ProductP();
-                        $pp->ShowProductsByUser();
+                        $pp->ShowProductsSearch();
                     ?>
                 </div>
                 <?php 
