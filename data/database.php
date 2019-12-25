@@ -4,7 +4,7 @@ class Database {
     public $host = "localhost";
     public $user = "root";
     public $pass = "";
-    public $dbname = "web";
+    public $dbname = "web1";
  
     public $link;
     public $error;
@@ -64,5 +64,3 @@ class Database {
         }
     }
 }
- 
-?>
