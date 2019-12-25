@@ -130,6 +130,19 @@
 			}
 		}
 
+		public function ShowProductsBySearch($search) {
+			$ib = new InventoryB();
+			$searchList = $ib->SearchProduct($search);
+			if ($searchList != null){
+				while ($row = mysqli_fetch_array($searchList)) {
+					$this->ShowProduct($row['product_name'], $row['product_price'], $row['product_id']);
+				}
+			}
+			else {
+				echo "ahihi do ngok";
+			}
+		}
+
 		public function ShowProductsByUser() {
 			$cp = new categoryP();
 			$cat_id = $cp->GetCategory();
@@ -138,6 +151,17 @@
 			}
 			else {
 				$this->ShowProductsByGroup();
+			}
+		}
+
+		public function ShowProductsSearch() {
+			$cp = new categoryP();
+			$search = $cp->GetSearch();
+			if (empty($search)) {
+				//
+			}
+			else {
+				$this->ShowProductsBySearch($search);
 			}
 		}
 	}
