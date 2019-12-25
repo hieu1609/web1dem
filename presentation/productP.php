@@ -73,21 +73,32 @@
 		}
 
 		public function ShowFeaturedProduct() {
-			//1. Get product list sorted by performance
-			$ib = new InventoryB();
-			$featuredList = $ib->GetPoorPerformanceList($this->from, $this->to);
-
-			foreach($featuredList as $x => $x_value) {
-				$pb = new ProductB();
-				$result = $pb->GetProductsByID($x);
-				$row = mysqli_fetch_array($result);
-				$this->ShowProduct($row['product_name'], $row['product_price'], $row['product_id']);
-            }
-		}
-
-		public function VarForProductName($cat_id, $page_id, $product_name, $count) {
-			$session_name = $cat_id . "_" . $page_id . "_" . "name" . "_" . $count;
-			$_SESSION["{$session_name}"] = $product_name;
+			$session_name = "Featured_Product";
+			if (isset($_SESSION["{$session_name}"])){
+				foreach($_SESSION["{$session_name}"] as $value){
+					$this->ShowProduct($value->product_name, $value->product_price, $value->product_id);
+				}
+				echo "vao session";
+			}
+			else {
+				$_SESSION["{$session_name}"] = array();
+				$i = 0;
+				//1. Get product list sorted by performance
+				$ib = new InventoryB();
+				$featuredList = $ib->GetPoorPerformanceList($this->from, $this->to);
+	
+				foreach($featuredList as $x => $x_value) {
+					$pb = new ProductB();
+					$result = $pb->GetProductsByID($x);
+					$row = mysqli_fetch_array($result);
+					$this->ShowProduct($row['product_name'], $row['product_price'], $row['product_id']);
+					$_SESSION["{$session_name}"][$i] = new stdClass();
+					$_SESSION["{$session_name}"][$i]->product_name =  $row['product_name'];
+					$_SESSION["{$session_name}"][$i]->product_price = $row['product_price'];
+					$_SESSION["{$session_name}"][$i]->product_id = $row['product_id'];
+					$i++;
+				}
+			}
 		}
 
 		public function ShowProductsByGroup() {
@@ -95,10 +106,27 @@
 			$cat_id = $cp->GetCategory();
 			$page_id = $cp->GetPage();
 
-			$cb = new categoryB();
-			$result = $cb->GetProductsInGroup($cat_id, $page_id);
-			while ($row = mysqli_fetch_array($result)) {
-				$this->ShowProduct($row['product_name'], $row['product_price'], $row['product_id']);
+			$session_name = $cat_id . "_" . $page_id;
+
+			if (isset($_SESSION["{$session_name}"])){
+				foreach($_SESSION["{$session_name}"] as $value){
+					$this->ShowProduct($value->product_name, $value->product_price, $value->product_id);
+				}
+				echo "vao session";
+			}
+			else {
+				$_SESSION["{$session_name}"] = array();
+				$i = 0;
+				$cb = new categoryB();
+				$result = $cb->GetProductsInGroup($cat_id, $page_id);
+				while ($row = mysqli_fetch_array($result)) {
+					$this->ShowProduct($row['product_name'], $row['product_price'], $row['product_id']);
+					$_SESSION["{$session_name}"][$i] = new stdClass();
+					$_SESSION["{$session_name}"][$i]->product_name =  $row['product_name'];
+					$_SESSION["{$session_name}"][$i]->product_price = $row['product_price'];
+					$_SESSION["{$session_name}"][$i]->product_id = $row['product_id'];
+					$i++;
+				}
 			}
 		}
 

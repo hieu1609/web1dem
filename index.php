@@ -88,9 +88,7 @@ session_start();
             </div>
         </div>
     </div>
-    <?php
-        print_r($_SESSION);
-    ?>
+
     <footer class="page-footer font-small py-3 bg-dark mt-4">
         <p class="footer-copyright text-center py-3 text-white">
             Copyright © Your Website 2019
