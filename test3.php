@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,16 +8,14 @@ session_start();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Volkhov&display=swap" rel="stylesheet">
     <link href="/web1dem/style.css" rel="stylesheet">
-
     <title>Gundam Shop</title>
     <?php
     include "presentation/categoryP.php";
     $cp = new CategoryP();
     ?>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(window).on('scroll', function() {
             if ($(window).scrollTop()) {
                 $('nav').addClass('black');
@@ -28,12 +23,12 @@ session_start();
                 $('nav').removeClass('black');
             }
         })
-    </script>
+    </script> -->
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-sm px-0 py-0 shop_navbar">
+    <nav class="navbar navbar-expand-sm px-0 py-0 shop_navbar black">
 
         <a class="navbar-brand ml-3 px-0 py-0 shop_name" href="#">
             <img src="/web1dem/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" height="70" width="70" alt="" />
@@ -78,45 +73,24 @@ session_start();
             </ul>
         </div>
     </nav>
-    <div id="carouselId" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselId" data-slide-to="1"></li>
-            <li data-target="#carouselId" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-                <img src="/web1dem/include/img/https___s3-ap-northeast-1.amazonaws.com_psh-ex-ftnikkei-3937bb4_images_2_4_6_7_21917642-1-eng-GB_コピー）ガンプラ仕掛け写真候補(2)プラモデル20190730142633 のコピー.jpg" width="1350" height="500" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img src="/web1dem/include/img/20150901_001929.jpg" width="1350" height="500" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img src="/web1dem/include/img/gv_banner.jpg" width="1350" height="500" alt="Third slide">
-            </div>
-            <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+    <div class="product_detail">
+
 
         <div class="container">
-
             <div class="row">
-                <?php
-                include "presentation/productP.php";
-                $pp = new ProductP();
-                $pp->ShowProductsByUser();
-                ?>
+                <div class="col-6">
+                    <img class="card-img-top" src="https://viblo.asia/uploads/4fa78009-6f23-494d-a41f-f14e837c66d1.png" alt="Card image">
+                </div>
+                <div class="col-6">
+                    <h4 class="card-title"><a href="#">123</a></h4>
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <span class="card-text oldprice">123</span>
+                    <span class="card-text newprice">123</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                    <button class="add-to-cart"><i class="fa fa-cart-plus"></i>Add to cart </button>
+                    <button class="buy-now">Buy now</button>
+                </div>
             </div>
-            <?php
-            $cp->BuildLinks();
-            ?>
-
         </div>
     </div>
 
