@@ -35,21 +35,24 @@ class ProductP
 			}
 			else{ 
 				$_SESSION['cart'][$id]=array( 
-						"quantity" => 1
+						"quantity" => 1,
+						"product_id" => $id,
+						"product_name" => $name,
+						"product_new_price" => $newPrice,
+						"product_image" => $image
 					);  
 			}  
+			if($_GET['href']=="cart"){
+				header("Location: cart.php");
+				die();
+			}
 		} 
 		else if(isset($_GET['action']) && $_GET['action']=="sub"){ 
 			$id=intval($_GET['product_id']); 
-			if(isset($_SESSION['cart'][$id]) && isset($_SESSION['cart'][$id]) > 1){ 
+			if(isset($_SESSION['cart'][$id]) && $_SESSION['cart'][$id]["quantity"] > 1){ 
 				$_SESSION['cart'][$id]['quantity']--; 
 			}
 		} 
-		
-		echo '<pre>';
-		var_dump($_SESSION);
-		echo count($_SESSION['cart']);
-		echo '</pre>';
 	}
 
 	public function GetProductInCart()
@@ -103,10 +106,16 @@ class ProductP
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit Amet numquam aspernatur!</p>
 					<a href="item.php?product_id={$id}&action=add"
 					onclick="window.location.reload(true);">
-					<button class="add-to-cart">
-					<i class="fa fa-cart-plus"></i>Add to cart 
-					</button></a>
-					<button class="buy-now">Buy now</button>
+						<button class="add-to-cart">
+							<i class="fa fa-cart-plus"></i>Add to cart 
+						</button>
+					</a>
+					<a href="item.php?product_id={$id}&action=add&href=cart"
+					onclick="window.location.reload(true);">
+						<button class="buy-now">
+							Buy now
+						</button>
+					</a>
 				</div>
 			</div>
 			DELIMITER;
@@ -230,6 +239,99 @@ class ProductP
 		} else {
 			$this->ShowProductsBySearch($search);
 		}
+	}
+
+	public function ShowProductsInCart()
+	{
+		// Session
+		if(isset($_GET['action']) && $_GET['action']=="add"){ 
+			$id=intval($_GET['product_id']); 
+			$_SESSION['cart'][$id]['quantity']++; 
+		} 
+		else if(isset($_GET['action']) && $_GET['action']=="sub"){ 
+			$id=intval($_GET['product_id']); 
+			if($_SESSION['cart'][$id]["quantity"] > 1){ 
+				$_SESSION['cart'][$id]['quantity']--; 
+			}
+		} 
+
+		if(isset($_SESSION['cart'])){
+			$this->TitleProductInCart();
+			foreach ($_SESSION['cart'] as $value) {
+				$this->HaveProductInCart($value["product_name"], $value["product_new_price"], $value["product_id"], $value["product_image"], $value["quantity"]);
+			}
+		}
+		else {
+			$this->NoneProductInCart();
+		}
+	}
+
+	public function NoneProductInCart()
+	{
+		$product = <<<DELIMITER
+			<h5>
+			Your cart is empty
+			</h5>
+			DELIMITER;
+		echo $product;
+	}
+
+	public function HaveProductInCart($product_name, $product_new_price, $product_id, $product_image, $quantity)
+	{
+		$total = $product_new_price * $quantity;
+		$product = <<<DELIMITER
+			<li class="mt-3">
+				<div class="row">
+					<div class="col-2">
+						<img height="70" width="70" src="{$product_image}" alt="">
+					</div>
+					<div class="col-4 mt-4  ">
+						{$product_name}
+					</div>
+					<div class="col-2 mt-4 ">
+						{$product_new_price}
+					</div>
+					<div class="col-2 mt-4">
+						<a href="cart.php?product_id={$product_id}&action=sub"
+						onclick="window.location.reload(true);">
+						<button class="mr-1">-</button>
+						</a>
+						<span>{$quantity}</span>
+						<a href="cart.php?product_id={$product_id}&action=add"
+						onclick="window.location.reload(true);">
+						<button class="ml-1">+</button>
+						</a>
+					</div>
+					<div class="col-2 mt-4 ">
+						{$total}$
+					</div>
+				</div>
+			</li>
+			DELIMITER;
+		echo $product;
+	}
+	public function TitleProductInCart()
+	{
+		$product = <<<DELIMITER
+			<li>
+				<div class="row ">
+					<div class="col-2">
+					</div>
+					<div class="col-4 mt-3 pb-2  ">
+					</div>
+					<div class="col-2 mt-3 pb-2">
+						Price
+					</div>
+					<div class="col-2 mt-3 pb-2">
+						Number
+					</div>
+					<div class="col-2 mt-3 pb-2">
+						Total
+					</div>
+				</div>
+			</li>
+			DELIMITER;
+		echo $product;
 	}
 }
 ?>
