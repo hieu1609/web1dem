@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +14,8 @@
     <link href="/web1/stylecart.css" rel="stylesheet">
     <title>Gundam Shop</title>
     <?php
-    include "presentation/categoryP.php";
-    $cp = new CategoryP();
+    include "presentation/productP.php";
+    $pp = new ProductP();
     ?>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
@@ -27,69 +30,10 @@
     <div class="product_detail">
         <div class="container">
             <ul style="list-style: none">
-                <li>
-                    <div class="row ">
-                        <div class="col-2">
-                        </div>
-                        <div class="col-4 mt-3 pb-2  ">
-
-                        </div>
-                        <div class="col-2 mt-3 pb-2">
-                            Price
-                        </div>
-                        <div class="col-2 mt-3 pb-2">
-                            Number
-                        </div>
-                        <div class="col-2 mt-3 pb-2">
-                            Total
-                        </div>
-                    </div>
-                </li>
-                <li class="mt-3">
-                    <div class="row">
-                        <div class="col-2">
-                            <img height="70" width="70" src="/web1/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" alt="">
-                        </div>
-                        <div class="col-4 mt-4  ">
-                            Tên sản phẩm
-                        </div>
-                        <div class="col-2 mt-4 ">
-                            3000000VND
-                        </div>
-                        <div class="col-2 mt-4">
-                            <button class="mr-1">-</button>
-                            <span>20</span>
-                            <button class="ml-1">+</button>
-                        </div>
-                        <div class="col-2 mt-4 ">
-                            600000 VNd
-                        </div>
-                    </div>
-                </li>
-                <li class="mt-3">
-                    <div class="row">
-                        <div class="col-2">
-                            <img height="70" width="70" src="/web1/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" alt="">
-                        </div>
-                        <div class="col-4 mt-4  ">
-                            Tên sản phẩm
-                        </div>
-                        <div class="col-2 mt-4 ">
-                            3000000VND
-                        </div>
-                        <div class="col-2 mt-4">
-                            <button class="mr-1">-</button>
-                            <span>20</span>
-                            <button class="ml-1">+</button>
-                        </div>
-                        <div class="col-2 mt-4 ">
-                            600000 VNd
-                        </div>
-                    </div>
-                </li>
+                <?php
+                    $pp->ShowProductsInCart();
+                ?>
             </ul>
-            <h5>Giỏ hàng đang trống
-            </h5>
         </div>
     </div>
 
