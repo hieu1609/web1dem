@@ -194,7 +194,7 @@ span.newprice {
 .product_detail, .cart-detail {
     margin-top: 80px;
     font-family: 'Volkhov', serif;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(217, 217, 217);
     padding-top: 20px;
 }
 
@@ -231,9 +231,21 @@ span.newprice {
 }
 
 li {
+    padding: 5px;
     background-color: rgb(255, 255, 255);
+    border-radius: 6px;
 }
 
 .total-price{
-    margin-left: 915px;
+
+    margin-left: 890px;
 }
+.paypal-container{
+    width : 300px;
+    margin-top: 20px;
+    margin-left: 800px;
+}
+/* .marginleft-paypal{
+    display: flex;
+    justify-content: right;
+} */
