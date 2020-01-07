@@ -233,3 +233,7 @@ span.newprice {
 li {
     background-color: rgb(255, 255, 255);
 }
+
+.total-price{
+    margin-left: 915px;
+}

@@ -42,10 +42,6 @@ class ProductP
 						"product_image" => $image
 					);  
 			}  
-			if($_GET['href']=="cart"){
-				header("Location: cart.php");
-				die();
-			}
 		} 
 		else if(isset($_GET['action']) && $_GET['action']=="sub"){ 
 			$id=intval($_GET['product_id']); 
@@ -110,8 +106,7 @@ class ProductP
 							<i class="fa fa-cart-plus"></i>Add to cart 
 						</button>
 					</a>
-					<a href="item.php?product_id={$id}&action=add&href=cart"
-					onclick="window.location.reload(true);">
+					<a href="cart.php">
 						<button class="buy-now">
 							Buy now
 						</button>
@@ -260,10 +255,25 @@ class ProductP
 			foreach ($_SESSION['cart'] as $value) {
 				$this->HaveProductInCart($value["product_name"], $value["product_new_price"], $value["product_id"], $value["product_image"], $value["quantity"]);
 			}
+			$this->TotalPriceProductInCart();
 		}
 		else {
 			$this->NoneProductInCart();
 		}
+	}
+
+	public function TotalPriceProductInCart()
+	{
+		$total = 0;
+		foreach ($_SESSION['money'] as $value) {
+			$total = $total + $value;
+		}
+		$product = <<<DELIMITER
+			<h3 class="total-price">
+			{$total}$
+			</h3>
+			DELIMITER;
+		echo $product;
 	}
 
 	public function NoneProductInCart()
@@ -279,6 +289,7 @@ class ProductP
 	public function HaveProductInCart($product_name, $product_new_price, $product_id, $product_image, $quantity)
 	{
 		$total = $product_new_price * $quantity;
+		$_SESSION['money'][$product_id] = $total;
 		$product = <<<DELIMITER
 			<li class="mt-3">
 				<div class="row">
