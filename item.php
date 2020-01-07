@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,31 +12,24 @@
     <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Volkhov&display=swap" rel="stylesheet">
-    <link href="/web1dem/style.css" rel="stylesheet">
+    <link href="/web1/style.css" rel="stylesheet">
 
     <title>Gundam Shop</title>
     <?php
     include "presentation/categoryP.php";
     $cp = new CategoryP();
+    include "presentation/productP.php";
+    $pp = new ProductP();
     ?>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- <script type="text/javascript">
-        $(window).on('scroll', function() {
-            if ($(window).scrollTop()) {
-                $('nav').addClass('black');
-            } else {
-                $('nav').removeClass('black');
-            }
-        })
-    </script> -->
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-sm px-0 py-0 shop_navbar black">
 
-        <a class="navbar-brand ml-3 px-0 py-0 shop_name" href="#">
-            <img src="/web1dem/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" height="70" width="70" alt="" />
+        <a class="navbar-brand ml-3 px-0 py-0 shop_name" href="index.php">
+            <img src="/web1/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" height="70" width="70" alt="" />
             Gundam Shop</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -41,7 +37,6 @@
         <div class="dropdown">
             <button class="dropbtn"><i class="fa fa-list"></i> Categories</button>
             <div class="dropdown-content">
-
                 <?php
                 $cp->ShowAllCategories();
                 ?>
@@ -55,22 +50,21 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0 mr-5">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="index.php">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="index.php">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="index.php">Contact</a>
                 </li>
                 <li>
-                    <div class="cart ">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>3</span>
-                    </div>
+                    <?php
+                    $pp->GetProductInCart();
+                    ?>
                 </li>
             </ul>
         </div>
@@ -82,8 +76,6 @@
 
             <div class="row">
                 <?php
-                include "presentation/productP.php";
-                $pp = new ProductP();
                 $pp->ShowItem();
                 ?>
             </div>

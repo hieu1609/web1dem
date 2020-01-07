@@ -1,0 +1,235 @@
+.shop_name {
+    color: white;
+    font-size: 35px;
+}
+
+.shop_navbar {
+    position: fixed;
+    z-index: 2;
+    /* background-color: white; */
+    width: 100%;
+    top: 0;
+    transition: all 0.5s;
+}
+
+nav a {
+    color: white;
+    font-family: 'Volkhov', serif;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+nav a:hover {
+    color: whitesmoke;
+}
+
+nav.black a:hover {
+    color: black;
+}
+
+.black {
+    color: #645a53;
+    background-color: white;
+    transition: all 0.5s;
+}
+
+.black a {
+    color: #645a53;
+}
+
+/* .shop_name:hover {
+    color: black;
+} */
+
+.search_form {
+    margin-left: 20px;
+    background-color: none;
+    display: none;
+}
+
+.search_form input {
+    border: none;
+    background-color: transparent;
+}
+
+.search_form input:focus {
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+
+.search_form button {
+    border: none;
+    margin: 0;
+    height: 42px;
+    background-color: transparent;
+    font-size: 15px;
+    padding: 1px 15px;
+}
+
+.search_form button:hover {
+    background-color: #5cb85c;
+    color: white;
+}
+
+form.search_form {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.black .search_form {
+    display: inline-block;
+}
+
+/* Dropdown Button */
+
+.dropbtn {
+    color: white;
+    padding: 16px;
+    /* font-size: 16px; */
+    border: none;
+    margin-left: 30px;
+    background-color: transparent;
+    font-family: 'Volkhov', serif;
+    font-size: 20px;
+}
+
+.black .dropbtn {
+    color: #645a53;
+    font-size: 20px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left: 30px;
+}
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+/* .dropdown:hover .dropbtn {
+    background-color: #f2f3f5;
+} */
+
+.cart i {
+    padding-left: 10px;
+    margin-top: 15px;
+    font-size: 25px;
+    color: white;
+}
+
+.black .cart i {
+    color: black;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart span {
+    position: absolute;
+    top: -10px;
+    left: 29px;
+    padding-left: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-top: 15px;
+    font-size: 15px;
+    color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0.383);
+    font-weight: bold;
+}
+
+.black .cart span {
+    color: black;
+    background-color: rgba(67, 198, 231, 0.52);
+    font-weight: bold;
+}
+
+span.oldprice {
+    text-decoration: line-through;
+    color: #645a53;
+}
+
+span.newprice {
+    font-size: 30px;
+}
+
+.product_detail, .cart-detail {
+    margin-top: 80px;
+    font-family: 'Volkhov', serif;
+    background-color: rgb(245, 245, 245);
+    padding-top: 20px;
+}
+
+.add-to-cart {
+    font-family: 'Volkhov', serif;
+    height: 50px;
+    width: 150px;
+    margin-right: 20px;
+    background-color: rgba(38, 167, 81, 0.376);
+    border: 1px solid green;
+    color: green;
+}
+
+.add-to-cart i {
+    margin-right: 10px;
+}
+
+.buy-now {
+    font-family: 'Volkhov', serif;
+    height: 50px;
+    width: 150px;
+    background-color: green;
+    border: 1px solid green;
+    color: whitesmoke;
+}
+
+/* .cart-detail {
+    background-color: rgba(0, 0, 0, 0.2);
+} */
+
+.brand {
+    padding-left: 10px;
+    border-left: 1px solid black;
+}
+
+li {
+    background-color: rgb(255, 255, 255);
+}

@@ -12,12 +12,14 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Volkhov&display=swap" rel="stylesheet">
-    <link href="/web1dem/style.css" rel="stylesheet">
+    <link href="/web1/style.css" rel="stylesheet">
 
     <title>Gundam Shop</title>
     <?php
     include "presentation/categoryP.php";
     $cp = new CategoryP();
+    include "presentation/productP.php";
+    $pp = new ProductP();
     ?>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript">
@@ -35,8 +37,8 @@ session_start();
 
     <nav class="navbar navbar-expand-sm px-0 py-0 shop_navbar">
 
-        <a class="navbar-brand ml-3 px-0 py-0 shop_name" href="#">
-            <img src="/web1dem/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" height="70" width="70" alt="" />
+        <a class="navbar-brand ml-3 px-0 py-0 shop_name" href="index.php">
+            <img src="/web1/include/img/Cartoons__Anime_Gundam_Artboard_7-512.png" height="70" width="70" alt="" />
             Gundam Shop</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,7 +46,6 @@ session_start();
         <div class="dropdown">
             <button class="dropbtn"><i class="fa fa-list"></i> Categories</button>
             <div class="dropdown-content">
-
                 <?php
                 $cp->ShowAllCategories();
                 ?>
@@ -58,22 +59,21 @@ session_start();
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0 mr-5">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="index.php">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="index.php">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="index.php">Contact</a>
                 </li>
                 <li>
-                    <div class="cart ">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>3</span>
-                    </div>
+                    <?php
+                    $pp->GetProductInCart();
+                    ?>
                 </li>
             </ul>
         </div>
@@ -86,13 +86,13 @@ session_start();
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img src="/web1dem/include/img/https___s3-ap-northeast-1.amazonaws.com_psh-ex-ftnikkei-3937bb4_images_2_4_6_7_21917642-1-eng-GB_コピー）ガンプラ仕掛け写真候補(2)プラモデル20190730142633 のコピー.jpg" width="1350" height="500" alt="First slide">
+                <img src="/web1/include/img/https___s3-ap-northeast-1.amazonaws.com_psh-ex-ftnikkei-3937bb4_images_2_4_6_7_21917642-1-eng-GB_コピー）ガンプラ仕掛け写真候補(2)プラモデル20190730142633 のコピー.jpg" width="1350" height="500" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img src="/web1dem/include/img/20150901_001929.jpg" width="1350" height="500" alt="Second slide">
+                <img src="/web1/include/img/20150901_001929.jpg" width="1350" height="500" alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img src="/web1dem/include/img/gv_banner.jpg" width="1350" height="500" alt="Third slide">
+                <img src="/web1/include/img/gv_banner.jpg" width="1350" height="500" alt="Third slide">
             </div>
             <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -108,8 +108,6 @@ session_start();
 
             <div class="row">
                 <?php
-                include "presentation/productP.php";
-                $pp = new ProductP();
                 $pp->ShowProductsByUser();
                 ?>
             </div>

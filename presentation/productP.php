@@ -16,15 +16,62 @@ class ProductP
 		$pb = new ProductB();
 		$result = $pb->GetProductsByID($product_id);
 		$row = mysqli_fetch_array($result);
+		$id = $row['product_id'];
 		$name = $row['product_name'];
 		$price = $row['product_price'];
 		$image = $row['product_image'];
 		$newPrice = $row['product_new_price'];
-		$this->ShowSingleProduct($name, $newPrice, $price, $image);
+		$this->ShowSingleProduct($name, $newPrice, $price, $image, $id);
 
 		//3. Update view
 		$pab = new ProductAnalysisB();
 		$pab->UpdateViewOfProduct($product_id);
+
+		//4. Session
+		if(isset($_GET['action']) && $_GET['action']=="add"){ 
+			$id=intval($_GET['product_id']); 
+			if(isset($_SESSION['cart'][$id])){ 
+				$_SESSION['cart'][$id]['quantity']++; 
+			}
+			else{ 
+				$_SESSION['cart'][$id]=array( 
+						"quantity" => 1
+					);  
+			}  
+		} 
+		else if(isset($_GET['action']) && $_GET['action']=="sub"){ 
+			$id=intval($_GET['product_id']); 
+			if(isset($_SESSION['cart'][$id]) && isset($_SESSION['cart'][$id]) > 1){ 
+				$_SESSION['cart'][$id]['quantity']--; 
+			}
+		} 
+		
+		echo '<pre>';
+		var_dump($_SESSION);
+		echo count($_SESSION['cart']);
+		echo '</pre>';
+	}
+
+	public function GetProductInCart()
+	{	
+		if(isset($_SESSION['cart'])){
+			$count = count($_SESSION['cart']);
+		}
+		else {
+			$count = 0;
+		}
+
+		$productInCart = <<<DELIMITER
+		<a href="cart.php">
+		<div class="cart">
+			<i class="fa fa-shopping-cart"></i>
+			<span>
+			{$count}
+			</span>
+		</div>
+		</a>
+		DELIMITER;
+		echo $productInCart;
 	}
 
 	public function GetProduct()
@@ -37,7 +84,7 @@ class ProductP
 		return $product_id;
 	}
 
-	public function ShowSingleProduct($name, $newPrice, $price, $image)
+	public function ShowSingleProduct($name, $newPrice, $price, $image, $id)
 	{
 		$product = <<<DELIMITER
 			<div class="row">
@@ -54,7 +101,11 @@ class ProductP
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit
 					Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit Amet numquam aspernatur!</p>
-					<button class="add-to-cart"><i class="fa fa-cart-plus"></i>Add to cart </button>
+					<a href="item.php?product_id={$id}&action=add"
+					onclick="window.location.reload(true);">
+					<button class="add-to-cart">
+					<i class="fa fa-cart-plus"></i>Add to cart 
+					</button></a>
 					<button class="buy-now">Buy now</button>
 				</div>
 			</div>
